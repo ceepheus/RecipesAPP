@@ -7,18 +7,12 @@ import {
   Text,
 } from 'react-native';
 
+import Login from "./Screens/Login";
+
 const App= () => {
   return (
     <>
-      <SafeAreaView style={styles.content}>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          contentContainerStyle={styles.scrollView}>
-          <View>
-            <Text>Login Page</Text>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <Login/>
     </>
   );
 };
