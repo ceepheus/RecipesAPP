@@ -7,7 +7,7 @@ import {
     Text
 } from 'react-native';
 
-const Login = () => {
+const Login = ({ navigation }) => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -36,7 +36,8 @@ const Login = () => {
             <TouchableOpacity style={styles.loginBtn}>
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('CreateAccount')}>
                 <Text style={styles.loginText}>Signup</Text>
             </TouchableOpacity>
         </View>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     loginText: {
-        color: "black",
+        color: "white",
         fontSize: 11
     },
 })
