@@ -1,10 +1,8 @@
-import React from "react";
-import AuthRoute from "./Auth";
+import React from 'react';
+import AuthRoute from './Auth';
 
-const Index = () => {
-    return (
-        <AuthRoute />
-    )
-}
+const Index = () => (
+  <AuthRoute />
+);
 
-export default Index
+export default Index;
