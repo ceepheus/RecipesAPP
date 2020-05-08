@@ -9,6 +9,8 @@ import {
   ToastAndroid,
   AlertIOS,
   ActivityIndicator,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import api from '../Services/Axios/Api';
 
@@ -81,7 +83,7 @@ const CreateAccount = ({ navigation }) => {
 
   function createAccount() {
     setLoading(true);
-    api.post('login/create', {
+    api.post('users/create', {
       nickname,
       email,
       password,
@@ -108,125 +110,129 @@ const CreateAccount = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Nickname..."
-          placeholderTextColor="#003f5c"
-          autoCapitalize="none"
-          onChangeText={(text) => setNickname(text)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email..."
-          placeholderTextColor="#003f5c"
-          autoCapitalize="none"
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Password..."
-          placeholderTextColor="#003f5c"
-          autoCapitalize="none"
-          secureTextEntry
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Confirm Password..."
-          placeholderTextColor="#003f5c"
-          autoCapitalize="none"
-          secureTextEntry
-          onChangeText={(text) => setConfirmPassword(text)}
-        />
-      </View>
-      <View style={styles.errorView}>
-        {
-          isNicknameEmpty
-            ? (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+      >
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Nickname..."
+            placeholderTextColor="#003f5c"
+            autoCapitalize="none"
+            onChangeText={(text) => setNickname(text)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Email..."
+            placeholderTextColor="#003f5c"
+            autoCapitalize="none"
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Password..."
+            placeholderTextColor="#003f5c"
+            autoCapitalize="none"
+            secureTextEntry
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Confirm Password..."
+            placeholderTextColor="#003f5c"
+            autoCapitalize="none"
+            secureTextEntry
+            onChangeText={(text) => setConfirmPassword(text)}
+          />
+        </View>
+        <View style={styles.errorView}>
+          {
+            isNicknameEmpty
+              ? (
+                <Text style={styles.errorMessage}>
+                  {'\u2B24'}
+                  {' '}
+                  Nickname is required.
+                </Text>
+              ) : null
+          }
+          {
+            !isEmailValid && isEmailRequired
+              ? (
+                <Text style={styles.errorMessage}>
+                  {'\u2B24'}
+                  Email Invalid
+                </Text>
+              ) : null
+          }
+          {
+            !isEmailRequired ? (
               <Text style={styles.errorMessage}>
                 {'\u2B24'}
                 {' '}
-                Nickname is required.
+                Email is required
               </Text>
             ) : null
-        }
-        {
-          !isEmailValid && isEmailRequired
-            ? (
-              <Text style={styles.errorMessage}>
-                {'\u2B24'}
-                Email Invalid
-              </Text>
-            ) : null
-        }
-        {
-          !isEmailRequired ? (
-            <Text style={styles.errorMessage}>
-              {'\u2B24'}
-              {' '}
-              Email is required
-            </Text>
-          ) : null
-        }
-        {
-          !isPasswordValid && !isPasswordEmpty ? (
-            <Text style={styles.errorMessage}>
-              {'\u2B24'}
-              {' '}
-              Password and Confirmation must be equal
-            </Text>
-          ) : null
-        }
-        {
-          !isPasswordLength && !isPasswordEmpty ? (
-            <Text style={styles.errorMessage}>
-              {'\u2B24'}
-              {' '}
-              The minimum password length is 6
-            </Text>
-          ) : null
-        }
-        {
-          isPasswordEmpty
-            ? (
+          }
+          {
+            !isPasswordValid && !isPasswordEmpty ? (
               <Text style={styles.errorMessage}>
                 {'\u2B24'}
                 {' '}
-                Password and confirmation are required
+                Password and Confirmation must be equal
               </Text>
             ) : null
-        }
-      </View>
-      <TouchableOpacity
-        style={isBtnDisabled ? styles.createBtnDisabled : styles.createBtnEnabled}
-        disabled={isBtnDisabled}
-        onPress={() => createAccount()}
-      >
-        {
-          loading ? <ActivityIndicator size="small" color="#003f5c" />
-            : <Text style={styles.createText}>CREATE</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.createText}>Back</Text>
-      </TouchableOpacity>
-    </View>
+          }
+          {
+            !isPasswordLength && !isPasswordEmpty ? (
+              <Text style={styles.errorMessage}>
+                {'\u2B24'}
+                {' '}
+                The minimum password length is 6
+              </Text>
+            ) : null
+          }
+          {
+            isPasswordEmpty
+              ? (
+                <Text style={styles.errorMessage}>
+                  {'\u2B24'}
+                  {' '}
+                  Password and confirmation are required
+                </Text>
+              ) : null
+          }
+        </View>
+        <TouchableOpacity
+          style={isBtnDisabled ? styles.createBtnDisabled : styles.createBtnEnabled}
+          disabled={isBtnDisabled}
+          onPress={() => createAccount()}
+        >
+          {
+            loading ? <ActivityIndicator size="small" color="#003f5c" />
+              : <Text style={styles.createText}>CREATE</Text>
+          }
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.createText}>Back</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#003f5c',
     alignItems: 'center',
     justifyContent: 'center',

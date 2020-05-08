@@ -9,6 +9,8 @@ import {
   AlertIOS,
   ActivityIndicator,
   Platform,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import api from '../Services/Axios/Api';
 
@@ -52,7 +54,7 @@ const Login = ({ navigation }) => {
 
   function login() {
     setLoading(true);
-    api.post('login', {
+    api.post('users/login', {
       email,
       password,
     }).then((res) => {
@@ -72,50 +74,54 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Recipes APP</Text>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email..."
-          placeholderTextColor="#003f5c"
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Password..."
-          placeholderTextColor="#003f5c"
-          secureTextEntry
-          onChangeText={(text) => setPassword(text)}
-        />
-      </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={btnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
-        onPress={() => { login(); }}
-        disabled={btnDisabled}
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView
+        contentContainerStyle={styles.container}
       >
-        {
-          loading ? <ActivityIndicator size="small" color="#003f5c" />
-            : <Text style={styles.loginText}>LOGIN</Text>
-        }
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('CreateAccount')}
-      >
-        <Text style={styles.loginText}>Signup</Text>
-      </TouchableOpacity>
-    </View>
+        <Text style={styles.logo}>Recipes APP</Text>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Email..."
+            placeholderTextColor="#003f5c"
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Password..."
+            placeholderTextColor="#003f5c"
+            secureTextEntry
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.forgot}>Forgot Password?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={btnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          onPress={() => { login(); }}
+          disabled={btnDisabled}
+        >
+          {
+            loading ? <ActivityIndicator size="small" color="#003f5c" />
+              : <Text style={styles.loginText}>LOGIN</Text>
+          }
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CreateAccount')}
+        >
+          <Text style={styles.loginText}>Signup</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#003f5c',
     alignItems: 'center',
     justifyContent: 'center',
