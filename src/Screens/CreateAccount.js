@@ -5,9 +5,15 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  Platform,
+  ToastAndroid,
+  AlertIOS,
+  ActivityIndicator,
 } from 'react-native';
+import api from '../Services/Axios/Api';
 
-const CreateAccount = () => {
+const CreateAccount = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
   const [nickname, setNickname] = useState('');
   const [isNicknameEmpty, setIsNicknameEmpty] = useState(true);
   const [email, setEmail] = useState('');
@@ -18,6 +24,7 @@ const CreateAccount = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isPasswordLength, setIsPasswordLength] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
 
   useEffect(() => {
     if (email.trim() !== '') {
@@ -58,6 +65,47 @@ const CreateAccount = () => {
       setIsPasswordValid(true);
     }
   }, [password, confirmPassword]);
+
+  useEffect(() => {
+    if (isNicknameEmpty
+      || !isEmailValid
+      || isPasswordEmpty
+      || !isPasswordLength
+      || !isPasswordValid
+      || loading) {
+      setIsBtnDisabled(true);
+      return;
+    }
+    setIsBtnDisabled(false);
+  }, [isNicknameEmpty, isEmailValid, isPasswordEmpty, isPasswordLength, isPasswordValid, loading]);
+
+  function createAccount() {
+    setLoading(true);
+    api.post('login/create', {
+      nickname,
+      email,
+      password,
+    }).then(() => {
+      const msg = 'Account has been created!';
+      if (Platform.OS === 'android') {
+        ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+      } else {
+        AlertIOS.alert(msg);
+      }
+      navigation.goBack();
+      setLoading(false);
+    }).catch((err) => {
+      if (err.response.data.errmsg.includes('duplicate key')) {
+        const msg = 'E-mail has already been taken';
+        if (Platform.OS === 'android') {
+          ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+        } else {
+          AlertIOS.alert(msg);
+        }
+        setLoading(false);
+      }
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -157,8 +205,20 @@ const CreateAccount = () => {
             ) : null
         }
       </View>
-      <TouchableOpacity style={styles.createBtn}>
-        <Text style={styles.createText}>CREATE</Text>
+      <TouchableOpacity
+        style={isBtnDisabled ? styles.createBtnDisabled : styles.createBtnEnabled}
+        disabled={isBtnDisabled}
+        onPress={() => createAccount()}
+      >
+        {
+          loading ? <ActivityIndicator size="small" color="#003f5c" />
+            : <Text style={styles.createText}>CREATE</Text>
+        }
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+      >
+        <Text style={styles.createText}>Back</Text>
       </TouchableOpacity>
     </View>
   );
@@ -184,9 +244,19 @@ const styles = StyleSheet.create({
     height: 50,
     color: 'white',
   },
-  createBtn: {
+  createBtnEnabled: {
     width: '80%',
     backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  createBtnDisabled: {
+    width: '80%',
+    backgroundColor: '#d4807f',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
