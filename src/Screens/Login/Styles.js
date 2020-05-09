@@ -1,0 +1,103 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#003f5c',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: '#fb5b5a',
+    marginBottom: 40,
+  },
+  inputView: {
+    width: '80%',
+    backgroundColor: '#465881',
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  inputText: {
+    height: 50,
+    color: 'white',
+  },
+  forgot: {
+    color: 'white',
+    fontSize: 11,
+  },
+  loginBtnEnabled: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  loginBtnDisabled: {
+    width: '80%',
+    backgroundColor: '#d4807f',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  loginText: {
+    color: 'white',
+    fontSize: 11,
+  },
+  backBtnEnabled: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  sendText: {
+    color: 'white',
+    fontSize: 11,
+  },
+  errorView: {
+    alignSelf: 'flex-start',
+    paddingLeft: 50,
+  },
+  errorMessage: {
+    color: 'white',
+    fontSize: 11,
+  },
+  createBtnEnabled: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  createBtnDisabled: {
+    width: '80%',
+    backgroundColor: '#d4807f',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  createText: {
+    color: 'white',
+    fontSize: 11,
+  },
+});

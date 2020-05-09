@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   Text,
@@ -12,7 +11,9 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import api from '../Services/Axios/Api';
+import api from '../../Services/Axios/Api';
+
+import styles from './Styles';
 
 const CreateAccount = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -229,59 +230,5 @@ const CreateAccount = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: '#003f5c',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputView: {
-    width: '80%',
-    backgroundColor: '#465881',
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  inputText: {
-    height: 50,
-    color: 'white',
-  },
-  createBtnEnabled: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    marginBottom: 10,
-  },
-  createBtnDisabled: {
-    width: '80%',
-    backgroundColor: '#d4807f',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    marginBottom: 10,
-  },
-  createText: {
-    color: 'white',
-    fontSize: 11,
-  },
-  errorView: {
-    alignSelf: 'flex-start',
-    paddingLeft: 50,
-  },
-  errorMessage: {
-    color: 'white',
-    fontSize: 11,
-  },
-});
 
 export default CreateAccount;
