@@ -8,6 +8,8 @@ import {
   Text,
 } from 'react-native';
 
+import api from '../../Services/Axios/Api';
+
 import styles from './Styles';
 
 const ForgotPassword = ({ navigation }) => {
@@ -37,6 +39,14 @@ const ForgotPassword = ({ navigation }) => {
     setIsBtnDisabled(false);
   }, [isEmailEmpty, isEmailValid]);
 
+  function sendEmail() {
+    api.post('users/forgotpassword', {
+      email,
+    }).then(() => {
+      navigation.navigate('ChangePassword', { email });
+    });
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -46,6 +56,8 @@ const ForgotPassword = ({ navigation }) => {
           <TextInput
             style={styles.inputText}
             placeholder="Email..."
+            autoCompleteType="email"
+            autoCapitalize="none"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => setEmail(text)}
           />
@@ -71,7 +83,9 @@ const ForgotPassword = ({ navigation }) => {
           }
         </View>
         <TouchableOpacity
+          disabled={isBtnDisabled}
           style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          onPress={() => sendEmail()}
         >
           <Text style={styles.sendText}>Send Email</Text>
         </TouchableOpacity>

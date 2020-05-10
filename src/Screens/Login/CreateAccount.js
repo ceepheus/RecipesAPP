@@ -128,6 +128,7 @@ const CreateAccount = ({ navigation }) => {
           <TextInput
             style={styles.inputText}
             placeholder="Email..."
+            autoCompleteType="email"
             placeholderTextColor="#003f5c"
             autoCapitalize="none"
             onChangeText={(text) => setEmail(text)}
