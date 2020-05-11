@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 
 import api from '../../Services/Axios/Api';
@@ -13,6 +14,7 @@ import api from '../../Services/Axios/Api';
 import styles from './Styles';
 
 const ForgotPassword = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isEmailEmpty, setIsEmailEmpty] = useState(true);
@@ -40,10 +42,14 @@ const ForgotPassword = ({ navigation }) => {
   }, [isEmailEmpty, isEmailValid]);
 
   function sendEmail() {
+    setLoading(true);
     api.post('users/forgotpassword', {
       email,
     }).then(() => {
       navigation.navigate('ChangePassword', { email });
+      setLoading(false);
+    }).catch(() => {
+      setLoading(false);
     });
   }
 
@@ -87,7 +93,10 @@ const ForgotPassword = ({ navigation }) => {
           style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
           onPress={() => sendEmail()}
         >
-          <Text style={styles.sendText}>Send Email</Text>
+          {
+            loading ? <ActivityIndicator size="small" color="#003f5c" />
+              : <Text style={styles.sendText}>Send Email</Text>
+          }
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}

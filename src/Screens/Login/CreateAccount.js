@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   TextInput,
@@ -16,6 +16,11 @@ import api from '../../Services/Axios/Api';
 import styles from './Styles';
 
 const CreateAccount = ({ navigation }) => {
+  const refNickname = useRef(null);
+  const refEmail = useRef(null);
+  const refPassword = useRef(null);
+  const refConfirmPassword = useRef(null);
+
   const [loading, setLoading] = useState(false);
   const [nickname, setNickname] = useState('');
   const [isNicknameEmpty, setIsNicknameEmpty] = useState(true);
@@ -117,6 +122,8 @@ const CreateAccount = ({ navigation }) => {
       >
         <View style={styles.inputView}>
           <TextInput
+            ref={refNickname}
+            onSubmitEditing={() => refEmail.current.focus()}
             style={styles.inputText}
             placeholder="Nickname..."
             placeholderTextColor="#003f5c"
@@ -126,6 +133,8 @@ const CreateAccount = ({ navigation }) => {
         </View>
         <View style={styles.inputView}>
           <TextInput
+            ref={refEmail}
+            onSubmitEditing={() => refPassword.current.focus()}
             style={styles.inputText}
             placeholder="Email..."
             autoCompleteType="email"
@@ -136,6 +145,8 @@ const CreateAccount = ({ navigation }) => {
         </View>
         <View style={styles.inputView}>
           <TextInput
+            ref={refPassword}
+            onSubmitEditing={() => refConfirmPassword.current.focus()}
             style={styles.inputText}
             placeholder="Password..."
             placeholderTextColor="#003f5c"
@@ -146,6 +157,7 @@ const CreateAccount = ({ navigation }) => {
         </View>
         <View style={styles.inputView}>
           <TextInput
+            ref={refConfirmPassword}
             style={styles.inputText}
             placeholder="Confirm Password..."
             placeholderTextColor="#003f5c"

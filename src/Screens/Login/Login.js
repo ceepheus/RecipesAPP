@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   View,
   TextInput,
@@ -24,6 +24,9 @@ const Login = ({ navigation }) => {
     errorMessage,
     loading,
   } = useContext(AuthContext);
+
+  const refEmail = useRef(null);
+  const refPassword = useRef(null);
 
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -87,6 +90,8 @@ const Login = ({ navigation }) => {
         <Text style={styles.logo}>Recipes APP</Text>
         <View style={styles.inputView}>
           <TextInput
+            ref={refEmail}
+            onSubmitEditing={() => refPassword.current.focus()}
             style={styles.inputText}
             placeholder="Email..."
             autoCompleteType="email"
@@ -97,6 +102,7 @@ const Login = ({ navigation }) => {
         </View>
         <View style={styles.inputView}>
           <TextInput
+            ref={refPassword}
             style={styles.inputText}
             placeholder="Password..."
             placeholderTextColor="#003f5c"
