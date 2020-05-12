@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import AuthRoute from './Auth';
+import AppRoute from './App';
 
 import AuthContext from '../Context/auth';
 
-import Home from '../Screens/Home/Home';
 import Splash from '../Screens/Splash/Splash';
 
 const Index = () => {
@@ -14,7 +14,7 @@ const Index = () => {
       return <Splash />;
     }
     if (signed) {
-      return <Home />;
+      return <AppRoute />;
     }
     return <AuthRoute />;
   }
