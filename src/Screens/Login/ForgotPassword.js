@@ -8,7 +8,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../Services/Axios/Api';
 
 import styles from './Styles';
@@ -59,6 +59,7 @@ const ForgotPassword = ({ navigation }) => {
         contentContainerStyle={styles.container}
       >
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="email" size={20} color="#2F2F2F" />
           <TextInput
             style={styles.inputText}
             placeholder="Email..."
@@ -72,7 +73,7 @@ const ForgotPassword = ({ navigation }) => {
           {
             !isEmailValid && !isEmailEmpty
               ? (
-                <Text style={styles.errorMessage}>
+                <Text style={styles.textForgotSignup}>
                   {'\u2B24'}
                   Email Invalid
                 </Text>
@@ -80,7 +81,7 @@ const ForgotPassword = ({ navigation }) => {
           }
           {
             isEmailEmpty ? (
-              <Text style={styles.errorMessage}>
+              <Text style={styles.textForgotSignup}>
                 {'\u2B24'}
                 {' '}
                 Email is required
@@ -95,13 +96,13 @@ const ForgotPassword = ({ navigation }) => {
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.sendText}>Send Email</Text>
+              : <Text style={styles.loginButtonText}>Send Email</Text>
           }
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.sendText}>Back</Text>
+          <Text style={styles.textForgotSignup}>Back</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

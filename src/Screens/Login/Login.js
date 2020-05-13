@@ -15,10 +15,11 @@ import {
   Platform,
   ScrollView,
   SafeAreaView,
+  Image,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import AuthContext from '../../Context/auth';
-
+import logo from '../../Assets/Images/Login/logo.png';
 import styles from './Styles';
 
 const Login = ({ navigation }) => {
@@ -92,8 +93,10 @@ const Login = ({ navigation }) => {
       <ScrollView
         contentContainerStyle={styles.container}
       >
-        <Text style={styles.logo}>Recipes APP</Text>
+        <Image style={styles.imageLogo} source={logo} />
+        {/* <Text style={styles.logo}>Welcome to Recipes APP</Text> */}
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="email" size={20} color="#2F2F2F" />
           <TextInput
             ref={refEmail}
             onSubmitEditing={() => refPassword.current.focus()}
@@ -101,23 +104,21 @@ const Login = ({ navigation }) => {
             placeholder="Email..."
             autoCompleteType="email"
             autoCapitalize="none"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             onChangeText={(text) => setEmail(text)}
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             ref={refPassword}
             style={styles.inputText}
             placeholder="Password..."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             secureTextEntry
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={btnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
           onPress={() => { login(); }}
@@ -125,14 +126,19 @@ const Login = ({ navigation }) => {
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.loginText}>LOGIN</Text>
+              : <Text style={styles.loginButtonText}>Log In</Text>
           }
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('CreateAccount')}
-        >
-          <Text style={styles.loginText}>Signup</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%' }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CreateAccount')}
+          >
+            <Text style={styles.textForgotSignup}>Signup</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={styles.textForgotSignup}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

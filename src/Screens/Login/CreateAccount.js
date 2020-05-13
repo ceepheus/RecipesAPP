@@ -11,8 +11,8 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../Services/Axios/Api';
-
 import styles from './Styles';
 
 const CreateAccount = ({ navigation }) => {
@@ -121,46 +121,50 @@ const CreateAccount = ({ navigation }) => {
         contentContainerStyle={styles.container}
       >
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="person" size={20} color="#2F2F2F" />
           <TextInput
             ref={refNickname}
             onSubmitEditing={() => refEmail.current.focus()}
             style={styles.inputText}
             placeholder="Nickname..."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             autoCapitalize="none"
             onChangeText={(text) => setNickname(text)}
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="email" size={20} color="#2F2F2F" />
           <TextInput
             ref={refEmail}
             onSubmitEditing={() => refPassword.current.focus()}
             style={styles.inputText}
             placeholder="Email..."
             autoCompleteType="email"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             autoCapitalize="none"
             onChangeText={(text) => setEmail(text)}
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             ref={refPassword}
             onSubmitEditing={() => refConfirmPassword.current.focus()}
             style={styles.inputText}
             placeholder="Password..."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             autoCapitalize="none"
             secureTextEntry
             onChangeText={(text) => setPassword(text)}
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             ref={refConfirmPassword}
             style={styles.inputText}
             placeholder="Confirm Password..."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             autoCapitalize="none"
             secureTextEntry
             onChangeText={(text) => setConfirmPassword(text)}
@@ -170,7 +174,7 @@ const CreateAccount = ({ navigation }) => {
           {
             isNicknameEmpty
               ? (
-                <Text style={styles.errorMessage}>
+                <Text style={styles.textForgotSignup}>
                   {'\u2B24'}
                   {' '}
                   Nickname is required.
@@ -180,7 +184,7 @@ const CreateAccount = ({ navigation }) => {
           {
             !isEmailValid && isEmailRequired
               ? (
-                <Text style={styles.errorMessage}>
+                <Text style={styles.textForgotSignup}>
                   {'\u2B24'}
                   Email Invalid
                 </Text>
@@ -188,7 +192,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isEmailRequired ? (
-              <Text style={styles.errorMessage}>
+              <Text style={styles.textForgotSignup}>
                 {'\u2B24'}
                 {' '}
                 Email is required
@@ -197,7 +201,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isPasswordValid && !isPasswordEmpty ? (
-              <Text style={styles.errorMessage}>
+              <Text style={styles.textForgotSignup}>
                 {'\u2B24'}
                 {' '}
                 Password and Confirmation must be equal
@@ -206,7 +210,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isPasswordLength && !isPasswordEmpty ? (
-              <Text style={styles.errorMessage}>
+              <Text style={styles.textForgotSignup}>
                 {'\u2B24'}
                 {' '}
                 The minimum password length is 6
@@ -216,7 +220,7 @@ const CreateAccount = ({ navigation }) => {
           {
             isPasswordEmpty
               ? (
-                <Text style={styles.errorMessage}>
+                <Text style={styles.textForgotSignup}>
                   {'\u2B24'}
                   {' '}
                   Password and confirmation are required
@@ -225,13 +229,13 @@ const CreateAccount = ({ navigation }) => {
           }
         </View>
         <TouchableOpacity
-          style={isBtnDisabled ? styles.createBtnDisabled : styles.createBtnEnabled}
+          style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
           disabled={isBtnDisabled}
           onPress={() => createAccount()}
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.createText}>CREATE</Text>
+              : <Text style={styles.loginButtonText}>Create</Text>
           }
         </TouchableOpacity>
         <TouchableOpacity

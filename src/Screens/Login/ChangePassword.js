@@ -8,7 +8,8 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Iconicons from 'react-native-vector-icons/Ionicons';
 import api from '../../Services/Axios/Api';
 
 import styles from './Styles';
@@ -99,6 +100,7 @@ const ChangePassword = ({ route, navigation }) => {
         contentContainerStyle={styles.container}
       >
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             style={styles.inputText}
             placeholder="Secret..."
@@ -108,6 +110,7 @@ const ChangePassword = ({ route, navigation }) => {
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             style={styles.inputText}
             placeholder="New Password..."
@@ -118,6 +121,7 @@ const ChangePassword = ({ route, navigation }) => {
           />
         </View>
         <View style={styles.inputView}>
+          <Icon style={styles.inputIcon} name="lock" size={20} color="#2F2F2F" />
           <TextInput
             style={styles.inputText}
             placeholder="Confirm New Password..."
