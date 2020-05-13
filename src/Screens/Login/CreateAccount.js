@@ -174,7 +174,7 @@ const CreateAccount = ({ navigation }) => {
           {
             isNicknameEmpty
               ? (
-                <Text style={styles.textForgotSignup}>
+                <Text style={styles.text}>
                   {'\u2B24'}
                   {' '}
                   Nickname is required.
@@ -184,7 +184,7 @@ const CreateAccount = ({ navigation }) => {
           {
             !isEmailValid && isEmailRequired
               ? (
-                <Text style={styles.textForgotSignup}>
+                <Text style={styles.text}>
                   {'\u2B24'}
                   Email Invalid
                 </Text>
@@ -192,7 +192,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isEmailRequired ? (
-              <Text style={styles.textForgotSignup}>
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
                 Email is required
@@ -201,7 +201,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isPasswordValid && !isPasswordEmpty ? (
-              <Text style={styles.textForgotSignup}>
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
                 Password and Confirmation must be equal
@@ -210,7 +210,7 @@ const CreateAccount = ({ navigation }) => {
           }
           {
             !isPasswordLength && !isPasswordEmpty ? (
-              <Text style={styles.textForgotSignup}>
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
                 The minimum password length is 6
@@ -220,7 +220,7 @@ const CreateAccount = ({ navigation }) => {
           {
             isPasswordEmpty
               ? (
-                <Text style={styles.textForgotSignup}>
+                <Text style={styles.text}>
                   {'\u2B24'}
                   {' '}
                   Password and confirmation are required
@@ -229,19 +229,19 @@ const CreateAccount = ({ navigation }) => {
           }
         </View>
         <TouchableOpacity
-          style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          style={isBtnDisabled ? styles.btnDisabled : styles.btnEnabled}
           disabled={isBtnDisabled}
           onPress={() => createAccount()}
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.loginButtonText}>Create</Text>
+              : <Text style={styles.buttonText}>Create</Text>
           }
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.createText}>Back</Text>
+          <Text style={styles.text}>Back</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

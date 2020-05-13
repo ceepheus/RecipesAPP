@@ -65,7 +65,7 @@ const ForgotPassword = ({ navigation }) => {
             placeholder="Email..."
             autoCompleteType="email"
             autoCapitalize="none"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             onChangeText={(text) => setEmail(text)}
           />
         </View>
@@ -73,7 +73,7 @@ const ForgotPassword = ({ navigation }) => {
           {
             !isEmailValid && !isEmailEmpty
               ? (
-                <Text style={styles.textForgotSignup}>
+                <Text style={styles.text}>
                   {'\u2B24'}
                   Email Invalid
                 </Text>
@@ -81,7 +81,7 @@ const ForgotPassword = ({ navigation }) => {
           }
           {
             isEmailEmpty ? (
-              <Text style={styles.textForgotSignup}>
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
                 Email is required
@@ -91,18 +91,18 @@ const ForgotPassword = ({ navigation }) => {
         </View>
         <TouchableOpacity
           disabled={isBtnDisabled}
-          style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          style={isBtnDisabled ? styles.btnDisabled : styles.btnEnabled}
           onPress={() => sendEmail()}
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.loginButtonText}>Send Email</Text>
+              : <Text style={styles.buttonText}>Send Email</Text>
           }
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.textForgotSignup}>Back</Text>
+          <Text style={styles.text}>Back</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

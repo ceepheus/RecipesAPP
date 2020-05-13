@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Iconicons from 'react-native-vector-icons/Ionicons';
 import api from '../../Services/Axios/Api';
 
 import styles from './Styles';
@@ -105,7 +104,7 @@ const ChangePassword = ({ route, navigation }) => {
             style={styles.inputText}
             placeholder="Secret..."
             autoCapitalize="none"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             onChangeText={(text) => setSecretToken(text)}
           />
         </View>
@@ -116,7 +115,7 @@ const ChangePassword = ({ route, navigation }) => {
             placeholder="New Password..."
             secureTextEntry
             autoCapitalize="none"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             onChangeText={(text) => setNewPassword(text)}
           />
         </View>
@@ -127,82 +126,84 @@ const ChangePassword = ({ route, navigation }) => {
             placeholder="Confirm New Password..."
             secureTextEntry
             autoCapitalize="none"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#C1C1C1"
             onChangeText={(text) => setConfirmNewPassword(text)}
           />
         </View>
-        {
-          !isPasswordValid && !isPasswordEmpty ? (
-            <Text style={styles.errorMessage}>
-              {'\u2B24'}
-              {' '}
-              Password and Confirmation must be equal
-            </Text>
-          ) : null
-        }
-        {
-          !isPasswordLength && !isPasswordEmpty ? (
-            <Text style={styles.errorMessage}>
-              {'\u2B24'}
-              {' '}
-              The minimum password length is 6
-            </Text>
-          ) : null
-        }
-        {
-          isPasswordEmpty
-            ? (
-              <Text style={styles.errorMessage}>
+        <View style={styles.errorView}>
+          {
+            !isPasswordValid && !isPasswordEmpty ? (
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
-                Password and confirmation are required
+                Password and Confirmation must be equal
               </Text>
             ) : null
-        }
-        {
-          isSecretEmpty
-            ? (
-              <Text style={styles.errorMessage}>
+          }
+          {
+            !isPasswordLength && !isPasswordEmpty ? (
+              <Text style={styles.text}>
                 {'\u2B24'}
                 {' '}
-                Secret token is required
+                The minimum password length is 6
               </Text>
             ) : null
-        }
-        {
-          !isSecretValid
-            ? (
-              <Text style={styles.errorMessage}>
-                {'\u2B24'}
-                {' '}
-                Secret token is invalid
-              </Text>
-            ) : null
-        }
-        {
-          requestNewToken
-            ? (
-              <Text style={styles.errorMessage}>
-                {'\u2B24'}
-                {' '}
-                Please request a new secret token
-              </Text>
-            ) : null
-        }
+          }
+          {
+            isPasswordEmpty
+              ? (
+                <Text style={styles.text}>
+                  {'\u2B24'}
+                  {' '}
+                  Password and confirmation are required
+                </Text>
+              ) : null
+          }
+          {
+            isSecretEmpty
+              ? (
+                <Text style={styles.text}>
+                  {'\u2B24'}
+                  {' '}
+                  Secret token is required
+                </Text>
+              ) : null
+          }
+          {
+            !isSecretValid
+              ? (
+                <Text style={styles.text}>
+                  {'\u2B24'}
+                  {' '}
+                  Secret token is invalid
+                </Text>
+              ) : null
+          }
+          {
+            requestNewToken
+              ? (
+                <Text style={styles.text}>
+                  {'\u2B24'}
+                  {' '}
+                  Please request a new secret token
+                </Text>
+              ) : null
+          }
+        </View>
         <TouchableOpacity
-          style={isBtnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          style={isBtnDisabled ? styles.btnDisabled : styles.btnEnabled}
           disabled={isBtnDisabled}
           onPress={() => changePassword()}
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.sendText}>Change Password</Text>
+              : <Text style={styles.buttonText}>Change Password</Text>
           }
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
         >
-          <Text style={styles.sendText}>Back</Text>
+          <Text style={styles.text}>Back</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

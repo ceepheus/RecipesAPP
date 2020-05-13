@@ -94,7 +94,6 @@ const Login = ({ navigation }) => {
         contentContainerStyle={styles.container}
       >
         <Image style={styles.imageLogo} source={logo} />
-        {/* <Text style={styles.logo}>Welcome to Recipes APP</Text> */}
         <View style={styles.inputView}>
           <Icon style={styles.inputIcon} name="email" size={20} color="#2F2F2F" />
           <TextInput
@@ -120,23 +119,23 @@ const Login = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-          style={btnDisabled ? styles.loginBtnDisabled : styles.loginBtnEnabled}
+          style={btnDisabled ? styles.btnDisabled : styles.btnEnabled}
           onPress={() => { login(); }}
           disabled={btnDisabled}
         >
           {
             loading ? <ActivityIndicator size="small" color="#003f5c" />
-              : <Text style={styles.loginButtonText}>Log In</Text>
+              : <Text style={styles.buttonText}>Log In</Text>
           }
         </TouchableOpacity>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%' }}>
           <TouchableOpacity
             onPress={() => navigation.navigate('CreateAccount')}
           >
-            <Text style={styles.textForgotSignup}>Signup</Text>
+            <Text style={styles.text}>Signup</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text style={styles.textForgotSignup}>Forgot Password?</Text>
+            <Text style={styles.text}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

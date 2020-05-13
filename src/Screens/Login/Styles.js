@@ -7,12 +7,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingTop: 80,
   },
-  logo: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: '#00AAAB',
-    marginBottom: 30,
-  },
   inputView: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -29,11 +23,7 @@ export default StyleSheet.create({
     width: '100%',
     height: 50,
   },
-  forgot: {
-    color: 'white',
-    fontSize: 11,
-  },
-  loginBtnEnabled: {
+  btnEnabled: {
     width: '95%',
     backgroundColor: '#00AAAB',
     borderRadius: 25,
@@ -43,7 +33,7 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   },
-  loginBtnDisabled: {
+  btnDisabled: {
     width: '95%',
     backgroundColor: '#3CDECE',
     borderRadius: 25,
@@ -53,61 +43,19 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   },
-  loginButtonText: {
+  buttonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
   },
-  textForgotSignup: {
+  text: {
     color: '#00AAAB',
     fontWeight: 'bold',
     fontSize: 14,
   },
-  backBtnEnabled: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  sendText: {
-    color: 'white',
-    fontSize: 11,
-  },
   errorView: {
     alignSelf: 'flex-start',
     paddingLeft: 50,
-  },
-  errorMessage: {
-    color: 'white',
-    fontSize: 11,
-  },
-  createBtnEnabled: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    marginBottom: 10,
-  },
-  createBtnDisabled: {
-    width: '80%',
-    backgroundColor: '#d4807f',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    marginBottom: 10,
-  },
-  createText: {
-    color: 'white',
-    fontSize: 11,
   },
   imageLogo: {
     width: 180,
