@@ -18,6 +18,7 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { GoogleSigninButton } from '@react-native-community/google-signin';
 import AuthContext from '../../Context/auth';
 import logo from '../../Assets/Images/Login/logo.png';
 import styles from './Styles';
@@ -29,6 +30,7 @@ const Login = ({ navigation }) => {
     error,
     errorMessage,
     loading,
+    googleSigin,
   } = useContext(AuthContext);
 
   const refEmail = useRef(null);
@@ -88,6 +90,10 @@ const Login = ({ navigation }) => {
     loginContext(email, password);
   }
 
+  function googleLogin() {
+    googleSigin();
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
@@ -128,6 +134,12 @@ const Login = ({ navigation }) => {
               : <Text style={styles.buttonText}>Log In</Text>
           }
         </TouchableOpacity>
+        <GoogleSigninButton
+          style={{ width: 192, height: 48, marginBottom: 10 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={() => googleLogin()}
+        />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%' }}>
           <TouchableOpacity
             onPress={() => navigation.navigate('CreateAccount')}

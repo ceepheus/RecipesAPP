@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import { googleKey } from 'react-native-dotenv';
 import api from '../Services/Axios/Api';
 
 const AuthContext = createContext({
@@ -13,6 +14,7 @@ const AuthContext = createContext({
   errorMessage: String,
   loading: Boolean,
   splashScreen: Boolean,
+  googleSigin: Object,
 });
 
 export const AuthProvider = ({ children }) => {
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [splashScreen, setSplashScreen] = useState(false);
+  const [userInfo, setuserInfo] = useState(null);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -67,6 +70,36 @@ export const AuthProvider = ({ children }) => {
     setErrorMessage('');
   }
 
+  async function googleSigin() {
+    GoogleSignin.configure({
+      scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+      webClientId: googleKey,
+      offlineAccess: true,
+      hostedDomain: '', // specifies a hosted domain restriction
+      loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+      forceCodeForRefreshToken: true,
+      accountName: '', // [Android] specifies an account name on the device that should be used
+    });
+
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userResp = await GoogleSignin.signIn();
+      console.log(userResp);
+      setuserInfo(userResp);
+    } catch (err) {
+      console.log(err);
+      if (err.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (err.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (err.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider value={{
       signed: signedIn,
@@ -77,6 +110,7 @@ export const AuthProvider = ({ children }) => {
       errorMessage,
       loading,
       splashScreen,
+      googleSigin,
     }}
     >
       {
