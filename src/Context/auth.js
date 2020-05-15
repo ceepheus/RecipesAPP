@@ -84,10 +84,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userResp = await GoogleSignin.signIn();
-      console.log(userResp);
       setuserInfo(userResp);
     } catch (err) {
-      console.log(err);
       if (err.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (err.code === statusCodes.IN_PROGRESS) {
