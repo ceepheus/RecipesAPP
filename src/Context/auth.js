@@ -71,6 +71,8 @@ export const AuthProvider = ({ children }) => {
   }
 
   async function googleSigin() {
+    setError(false);
+    setErrorMessage(false);
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
       webClientId: googleKey,
@@ -85,15 +87,32 @@ export const AuthProvider = ({ children }) => {
       await GoogleSignin.hasPlayServices();
       const userResp = await GoogleSignin.signIn();
       setuserInfo(userResp);
+      api.post('users/create-or-login-google', {
+        name: userResp.user.name,
+        email: userResp.user.email,
+        id: userResp.user.id,
+        photo: userResp.user.photo,
+      }).then(async (response) => {
+        await AsyncStorage.setItem('token', response.data.token);
+        setSignedIn(true);
+        setLoading(false);
+      }).catch((responseError) => {
+        setError(true);
+        if (responseError.response.data.msg === 'Access invalid') {
+          setErrorMessage(responseError.response.data.msg);
+        }
+        setLoading(false);
+      });
     } catch (err) {
+      setError(true);
       if (err.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
+        setErrorMessage('SIGN_IN_CANCELLED');
       } else if (err.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
+        setErrorMessage('IN_PROGRESS');
       } else if (err.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
+        setErrorMessage('PLAY_SERVICES_NOT_AVAILABLE');
       } else {
-        // some other error happened
+        setErrorMessage('ERROR');
       }
     }
   }
