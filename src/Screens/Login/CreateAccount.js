@@ -112,6 +112,16 @@ const CreateAccount = ({ navigation }) => {
         }
         setLoading(false);
       }
+      if (err.response.data.errmsg.includes('E-mail has already been used by a google account!')) {
+        const msg = 'E-mail has already been used by a google account!';
+        if (Platform.OS === 'android') {
+          ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+        } else {
+          AlertIOS.alert(msg);
+        }
+        setLoading(false);
+      }
+      setLoading(false);
     });
   }
 
