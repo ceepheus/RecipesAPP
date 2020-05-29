@@ -1,4 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
+import {
+  Platform,
+  ToastAndroid,
+  AlertIOS,
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import { googleKey } from 'react-native-dotenv';
@@ -100,6 +105,15 @@ export const AuthProvider = ({ children }) => {
         setError(true);
         if (responseError.response.data.msg === 'Access invalid') {
           setErrorMessage(responseError.response.data.msg);
+        }
+        if (responseError.response.data.msg === 'E-mail has already been used by a normal account!') {
+          setErrorMessage(responseError.response.data.msg);
+          const msg = 'E-mail has already been used by a google account!';
+          if (Platform.OS === 'android') {
+            ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+          } else {
+            AlertIOS.alert(msg);
+          }
         }
         setLoading(false);
       });
